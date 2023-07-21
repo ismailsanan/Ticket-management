@@ -3,9 +3,7 @@ package com.example.TicketManagement.controller;
 
 import com.example.TicketManagement.dto.request.CreateTicketRequestDTO;
 import com.example.TicketManagement.dto.response.TicketResponseDTO;
-import com.example.TicketManagement.entity.Ticket;
 import com.example.TicketManagement.service.TicketService;
-import com.example.TicketManagement.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,24 +13,26 @@ import org.springframework.web.bind.annotation.*;
 public class TicketController {
 
     private final TicketService ticketService;
-    private final UserService userService;
+//    private final UserService userService;
 
 
     @PostMapping("/{userId}")
     public TicketResponseDTO createTicket(@PathVariable Long userId, @RequestBody CreateTicketRequestDTO ticketRequestDTO){
-        Ticket ticket = ticketService.createTicket(userId,ticketRequestDTO);
 
-        TicketResponseDTO ticketResponseDTO = new TicketResponseDTO();
 
-        ticketResponseDTO.setId(ticket.getId());
-        ticketResponseDTO.setPriority(ticket.getPriority());
-        ticketResponseDTO.setCreatedAt( ticket.getCreatedAt());
-        ticketResponseDTO.setStatus(ticket.getStatus());
-        ticketResponseDTO.setModifiedAt(ticket.getModifiedAt());
-        ticketResponseDTO.setUserDto(userService.findById(userId));
-        ticketResponseDTO.setStatus(ticket.getStatus());
+        //        Ticket ticket = ticketService.createTicket(userId,ticketRequestDTO);
+        //
+        //        TicketResponseDTO ticketResponseDTO = new TicketResponseDTO();
+        //
+        //        ticketResponseDTO.setId(ticket.getId());
+        //        ticketResponseDTO.setPriority(ticket.getPriority());
+        //        ticketResponseDTO.setCreatedAt( ticket.getCreatedAt());
+        //        ticketResponseDTO.setStatus(ticket.getStatus());
+        //        ticketResponseDTO.setModifiedAt(ticket.getModifiedAt());
+        //        ticketResponseDTO.setUserDto(userService.findById(userId));
+        //        ticketResponseDTO.setStatus(ticket.getStatus());
 
-        return ticketResponseDTO;
+        return ticketService.createTicket(userId,ticketRequestDTO);
     }
 
 

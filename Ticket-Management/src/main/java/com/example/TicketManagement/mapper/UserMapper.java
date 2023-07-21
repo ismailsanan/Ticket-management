@@ -9,14 +9,14 @@ public class UserMapper {
 
 
     private static final Function<User, UserResponseDTO>  mapU =
-            user ->  new UserResponseDTO(user.getId() ,user.getName() , user.getEmail() , user.getRoles());
+            user ->  new UserResponseDTO(user.getId() ,user.getName() , user.getEmail() , user.getRoles() , user.getPassword());
 
 
     public static UserResponseDTO mapU (User users){
         return mapU.apply(users);
     }
     private static  final Function<UserResponseDTO, User> mapD =
-            userResponseDTO  -> new User(userResponseDTO.getId(),userResponseDTO.getName() , userResponseDTO.getEmail() , userResponseDTO.getRoles());
+            userResponseDTO  -> new User(userResponseDTO.getId(),userResponseDTO.getName() , userResponseDTO.getEmail() , userResponseDTO.getRoles(),userResponseDTO.getPassword());
 
     public static User mapD(UserResponseDTO userResponseDTO){
         return mapD.apply(userResponseDTO);

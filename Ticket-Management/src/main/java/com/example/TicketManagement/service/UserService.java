@@ -38,7 +38,7 @@ public class UserService {
 
             return userResponseDTO;
         }
-        else throw new RuntimeException("user not found");
+        else {throw new RuntimeException("user not found");}
 
 
     }
