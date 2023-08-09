@@ -1,10 +1,13 @@
 package com.example.TicketManagement.controller;
 
+import com.example.TicketManagement.dto.request.AuthenticateRequestDTO;
+import com.example.TicketManagement.dto.request.RegisterRequestDTO;
 import com.example.TicketManagement.dto.request.UserRequestDTO;
+import com.example.TicketManagement.dto.response.AuthenticationResponseDTO;
 import com.example.TicketManagement.dto.response.UserResponseDTO;
-import com.example.TicketManagement.entity.User;
 import com.example.TicketManagement.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,19 +17,31 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/")
-    public UserResponseDTO createUser(@RequestBody UserRequestDTO userdto){
+    @PostMapping("/signup")
+    public AuthenticationResponseDTO signup( @RequestBody RegisterRequestDTO authenticateRequest){
 
-       User user =  userService.createUser(userdto);
-       UserResponseDTO userResponseDTO = new UserResponseDTO();
-       userResponseDTO.setName(user.getName());
-       userResponseDTO.setEmail(user.getEmail());
-       userResponseDTO.setId(user.getId());
-       userResponseDTO.setRoles(user.getRoles());
-
-        return userResponseDTO;
+        return userService.signup(authenticateRequest);
     }
 
+
+
+
+
+    @PreAuthorize("hasAuthority('MANAGER')")
+    @PostMapping("/createuser")
+    public UserResponseDTO createUser(@RequestBody UserRequestDTO userRequestDTO) throws Exception {
+
+        return userService.createUser(userRequestDTO);
+
+
+    }
+
+
+    @PostMapping("/login")
+    public AuthenticationResponseDTO login(@RequestBody AuthenticateRequestDTO authenticateRequestDTO){
+        return userService.login(authenticateRequestDTO);
+
+    }
 
 
     @GetMapping("/{id}")

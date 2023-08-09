@@ -23,6 +23,7 @@ public class TicketResponseDTO {
         private Priority priority;
         private String title;
         private String description;
+        private ChatResponseDTO chat;
         private LocalDateTime createdAt;
         private  LocalDateTime modifiedAt;
 
