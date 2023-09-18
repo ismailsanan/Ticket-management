@@ -199,7 +199,7 @@ public class TicketService {
             throw new IllegalArgumentException("User not an expert");
         }
 
-        ticket.setUser(expert);
+        ticket.setExpert(expert);
         ticketRepository.save(ticket);
 
         return "OK";

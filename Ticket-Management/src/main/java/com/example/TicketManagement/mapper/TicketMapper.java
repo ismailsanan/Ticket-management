@@ -32,7 +32,7 @@ public class TicketMapper {
 
 
    private static final Function<TicketResponseDTO , Ticket> mapED =
-    TicketResponseDTO -> new Ticket(TicketResponseDTO.getId()  , UserMapper.mapD(TicketResponseDTO.getUserDto()),TicketResponseDTO.getStatus() ,
+    TicketResponseDTO -> new Ticket(TicketResponseDTO.getId()  , UserMapper.mapD(TicketResponseDTO.getUserDto()),UserMapper.mapD(TicketResponseDTO.getUserDto()), TicketResponseDTO.getStatus() ,
             TicketResponseDTO.getPriority() , TicketResponseDTO.getTitle(), TicketResponseDTO.getDescription() , ChatMapper.mapD(TicketResponseDTO.getChat()),
             TicketResponseDTO.getCreatedAt() , TicketResponseDTO.getModifiedAt());
 

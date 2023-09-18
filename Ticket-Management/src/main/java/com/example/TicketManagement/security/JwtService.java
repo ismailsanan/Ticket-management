@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -47,18 +48,10 @@ public class JwtService {
         return getClaims(token).getSubject();
     }
 
-    public boolean validateToken(String token){
-        String username = getUsername(token);
-        Date expiration = getClaims(token).getExpiration();
-        Date atDate = getClaims(token).getIssuedAt();
-        String is = Jwts.builder()
-                .setSubject(username)
-                .setExpiration(expiration)
-                .setIssuedAt(atDate)
-                .signWith(getKey() , SignatureAlgorithm.HS512)
-                .compact();
+    public boolean validateToken(String token , UserDetails userDetails ){
+        final String username = getUsername(token);
 
-        return is.equals(token);
+        return (username.equals(userDetails.getUsername()) && !getClaims(token).getExpiration().before(new Date()));
 
     }
 

@@ -33,7 +33,7 @@ public class SecurityConfig {
                                 .requestMatchers("/user/login").permitAll()
                                 .requestMatchers("/user/{id}").permitAll()
                                 .requestMatchers(HttpMethod.POST ,"/user/createuser").hasAuthority("MANAGER")  //WORKS !!!!
-                                .requestMatchers("/ticket/**").permitAll()
+                                //.requestMatchers("/ticket/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/ticket/{id}/assign/{id2}/{id3}").hasAuthority("MANAGER")
                                 .requestMatchers(HttpMethod.POST, "/ticket/createticket/{id}").hasAuthority("CUSTOMER")
                                 .requestMatchers(HttpMethod.PUT, "/ticket/process/{id}/stoprocess").hasAuthority("EXPERT")
@@ -41,6 +41,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, "/ticket/process/{id}/resolveticket").hasAuthority("EXPERT")
                                 .requestMatchers(HttpMethod.PUT, "/ticket/process/{id}/startprogress").hasAuthority("EXPERT")
                                 .requestMatchers(HttpMethod.PUT, "/ticket/process/{id}/reopenissue").hasAuthority("EXPERT")
+                                .requestMatchers(HttpMethod.GET, "/ticket/geticket/{id}").permitAll()
                                 .requestMatchers(HttpMethod.DELETE, "/ticket/process/removeticket/{id}").hasAnyAuthority(("EXPERT") , ("CUSTOMER"))
                                 .requestMatchers("/messages/**").permitAll()
                                 .requestMatchers("/chat/createchat").hasAuthority("CUSTOMER")

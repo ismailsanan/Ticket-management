@@ -21,6 +21,8 @@ public class Ticket {
 
     @ManyToOne
     private User user;
+    @ManyToOne
+    private User expert;
 
     @Enumerated(EnumType.STRING)
     private Status status;
